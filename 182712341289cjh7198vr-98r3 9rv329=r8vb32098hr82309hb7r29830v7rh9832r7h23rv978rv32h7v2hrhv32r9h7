@@ -1,0 +1,1031 @@
+local windows = loadstring(game:HttpGet("https://raw.githubusercontent.com/ZepsyyCodesLUA/Synapse-Library-OBFUSCATED-/main/Source.lua"))()
+local win = windows:Create({
+    Title = "Slammy Tron ",
+    Game = "Dahood"
+})
+
+local tab = win:NewTab({
+    Title = "Main"
+})
+
+tab:Button({
+    Title = "Slammy tron Rewrite (Q)",
+    Callback = function()
+        --[[
+
+░██████╗██╗░░░░░░█████╗░███╗░░░███╗███╗░░░███╗██╗░░░██╗  ░█████╗░███╗░░██╗  ████████╗░█████╗░██████╗░
+██╔════╝██║░░░░░██╔══██╗████╗░████║████╗░████║╚██╗░██╔╝  ██╔══██╗████╗░██║  ╚══██╔══╝██╔══██╗██╔══██╗
+╚█████╗░██║░░░░░███████║██╔████╔██║██╔████╔██║░╚████╔╝░  ██║░░██║██╔██╗██║  ░░░██║░░░██║░░██║██████╔╝
+░╚═══██╗██║░░░░░██╔══██║██║╚██╔╝██║██║╚██╔╝██║░░╚██╔╝░░  ██║░░██║██║╚████║  ░░░██║░░░██║░░██║██╔═══╝░
+██████╔╝███████╗██║░░██║██║░╚═╝░██║██║░╚═╝░██║░░░██║░░░  ╚█████╔╝██║░╚███║  ░░░██║░░░╚█████╔╝██║░░░░░
+╚═════╝░╚══════╝╚═╝░░╚═╝╚═╝░░░░░╚═╝╚═╝░░░░░╚═╝░░░╚═╝░░░  ░╚════╝░╚═╝░░╚══╝  ░░░╚═╝░░░░╚════╝░╚═╝░░░░░
+
+]]
+-- Toggle
+getgenv().Target = true
+-- Configuration
+    getgenv().Key = Enum.KeyCode.Q
+getgenv().Prediction = 0.173
+getgenv().ChatMode = false
+getgenv().NotifMode = true
+    getgenv().PartMode = true
+    getgenv().AirshotFunccc = true
+    getgenv().Partz = "LowerTorso"
+    --
+    _G.Types = {
+        Ball = Enum.PartType.Ball,
+        Block = Enum.PartType.Block, 
+        Cylinder = Enum.PartType.Cylinder
+    }
+    
+    --variables                 
+    	local Tracer = Instance.new("Part", game.Workspace)
+    Tracer.Name = "L"	
+    Tracer.Anchored = true		
+    Tracer.CanCollide = false
+    Tracer.Transparency = 0.8
+    Tracer.Parent = game.Workspace	
+    Tracer.Shape = _G.Types.Ball
+    Tracer.Size = Vector3.new(5,5,5)
+    Tracer.Color = Color3.fromRGB(255, 255, 255)
+    
+    --
+    local plr = game.Players.LocalPlayer
+local mouse = plr:GetMouse()
+local Runserv = game:GetService("RunService")
+
+circle = Drawing.new("Circle")
+circle.Color = Color3.fromRGB(255,255,255)
+circle.Thickness = 2
+circle.NumSides = 732
+circle.Radius = 9999
+circle.Thickness = 0
+circle.Transparency = 0.7
+circle.Visible = false
+circle.Filled = false
+
+Runserv.RenderStepped:Connect(function()
+    circle.Position = Vector2.new(mouse.X,mouse.Y+35)
+end)
+    
+    	local guimain = Instance.new("Folder", game.CoreGui)
+    	local CC = game:GetService"Workspace".CurrentCamera
+    local LocalMouse = game.Players.LocalPlayer:GetMouse()
+    	local Locking = false
+    
+    	
+    --
+    if getgenv().valiansh == true then
+                        game.StarterGui:SetCore("SendNotification", {
+                   Title = "Slammy Tron Rewrite",
+                   Text = "Already Loaded!",
+                   Duration = 5
+        
+                   })
+        return
+    end
+    
+    getgenv().valiansh = true
+    
+        local UserInputService = game:GetService("UserInputService")
+
+    UserInputService.InputBegan:Connect(function(keygo,ok)
+           if (not ok) then
+           if (keygo.KeyCode == getgenv().Key) then
+               if getgenv().Target == true then
+               Locking = not Locking
+               
+               if Locking then
+               Plr =  getClosestPlayerToCursor()
+                if getgenv().ChatMode then
+        local A_1 = "Target: "..tostring(Plr.Character.Humanoid.DisplayName) local A_2 = "All" local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest Event:FireServer(A_1, A_2) 
+        	end	
+               if getgenv().NotifMode then
+    			game.StarterGui:SetCore("SendNotification", {
+        Title = "Slammy Tron Rewrite";
+        Text = "Target: "..tostring(Plr.Character.Humanoid.DisplayName);
+    
+    })
+    end
+    elseif not Locking then
+         if getgenv().ChatMode then
+        local A_1 = "Unlocked!" local A_2 = "All" local Event = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest Event:FireServer(A_1, A_2) 
+        	end	
+        if getgenv().NotifMode then
+                        game.StarterGui:SetCore("SendNotification", {
+                   Title = "Slammy Tron Rewrite",
+                   Text = "Unlocked",
+                   Duration = 5
+               })
+           elseif getgenv().Target == false then
+                        game.StarterGui:SetCore("SendNotification", {
+                   Title = "Slammy Tron Rewrite",
+                   Text = "Target isn't enabled",
+                   Duration = 5
+     
+                   })
+               
+               end
+                  
+ 
+ end     end   
+end
+end
+end)
+	
+	function getClosestPlayerToCursor()
+		local closestPlayer
+		local shortestDistance = circle.Radius
+
+		for i, v in pairs(game.Players:GetPlayers()) do
+			if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("LowerTorso") then
+				local pos = CC:WorldToViewportPoint(v.Character.PrimaryPart.Position)
+				local magnitude = (Vector2.new(pos.X, pos.Y) - Vector2.new(LocalMouse.X, LocalMouse.Y)).magnitude
+				if magnitude < shortestDistance then
+					closestPlayer = v
+					shortestDistance = magnitude
+				end
+			end
+		end
+		return closestPlayer
+	end
+--
+if getgenv().PartMode then
+	game:GetService"RunService".Stepped:connect(function()
+		if Locking and Plr.Character and Plr.Character:FindFirstChild("LowerTorso") then
+			Tracer.CFrame = CFrame.new(Plr.Character.LowerTorso.Position+(Plr.Character.LowerTorso.Velocity*Prediction))
+		else
+			Tracer.CFrame = CFrame.new(0, 9999, 0)
+
+		end
+	end)
+end
+
+    
+    
+    --
+	local rawmetatable = getrawmetatable(game)
+	local old = rawmetatable.__namecall
+	setreadonly(rawmetatable, false)
+	rawmetatable.__namecall = newcclosure(function(...)
+		local args = {...}
+		if Locking and getnamecallmethod() == "FireServer" and args[2] == "UpdateMousePos" then
+			args[3] = Plr.Character[getgenv().Partz].Position+(Plr.Character[getgenv().Partz].Velocity*Prediction)
+			return old(unpack(args))
+		end
+		return old(...)
+	end)
+	if getgenv.AirshotFunccc then
+	if Plr.Character.Humanoid.Jump == true and Plr.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+        getgenv().Partz = "RightFoot"
+    else
+        getgenv().Partz = "RightFoot"
+	end
+end
+    end
+})
+
+
+
+
+
+
+
+tab:TextBox({
+    Title = "Prediction",
+    PlaceHolder = "Here!",
+
+    Callback = function(bool)
+        getgenv().Prediction = bool
+    end
+})
+
+local tab = win:NewTab({
+    Title = "Misc"
+})
+tab:Button({
+    Title = "Cframe (Z)",
+    Callback = function()
+            	repeat
+		wait()
+	until game:IsLoaded()
+	local L_134_ = game:service('Players')
+	local L_135_ = L_134_.LocalPlayer
+	repeat
+		wait()
+	until L_135_.Character
+	local L_136_ = game:service('UserInputService')
+	local L_137_ = game:service('RunService')
+	getgenv().Multiplier = 1
+	local L_138_ = true
+	local L_139_
+	L_136_.InputBegan:connect(function(L_140_arg0)
+		if L_140_arg0.KeyCode == Enum.KeyCode.LeftBracket then
+			Multiplier = Multiplier + 0.01
+			print(Multiplier)
+			wait(0.2)
+			while L_136_:IsKeyDown(Enum.KeyCode.LeftBracket) do
+				wait()
+				Multiplier = Multiplier + 0.01
+				print(Multiplier)
+			end
+		end
+		if L_140_arg0.KeyCode == Enum.KeyCode.RightBracket then
+			Multiplier = Multiplier - 0.01
+			print(Multiplier)
+			wait(0.2)
+			while L_136_:IsKeyDown(Enum.KeyCode.RightBracket) do
+				wait()
+				Multiplier = Multiplier - 0.01
+				print(Multiplier)
+			end
+		end
+		if L_140_arg0.KeyCode == Enum.KeyCode.Z then
+			L_138_ = not L_138_
+			if L_138_ == true then
+				repeat
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame + game.Players.LocalPlayer.Character.Humanoid.MoveDirection * Multiplier
+					game:GetService("RunService").Stepped:wait()
+				until L_138_ == false
+			end
+		end
+	end)
+    end
+})
+
+tab:Slider({
+    Title = "Cframe Speed Changer",
+    MinValue = 1,
+    Def = 1,
+    MaxValue = 7,
+    callback = function(s)
+        getgenv().Multiplier = s
+    end
+})
+
+tab:Button({
+    Title = "Cframe fixer",
+    Callback = function()
+            for _, v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+        if v:IsA("Script") and v.Name ~= "Health" and v.Name ~= "Sound" and v:FindFirstChild("LocalScript") then
+            v:Destroy()
+        end
+    end
+    game.Players.LocalPlayer.CharacterAdded:Connect(function(char)
+        repeat
+            wait()
+        until game.Players.LocalPlayer.Character
+        char.ChildAdded:Connect(function(child)
+            if child:IsA("Script") then 
+                wait(0.1)
+                if child:FindFirstChild("LocalScript") then
+                    child.LocalScript:FireServer()
+                end
+            end
+        end)
+    end)
+    end
+})
+
+tab:Button({
+    Title = "Antistomp (Toggle M)",
+    Callback = function()
+        game.Players.LocalPlayer:GetMouse().KeyDown:Connect(function(KeyPressed)
+ if KeyPressed == "m" then
+    for L_170_forvar0, L_171_forvar1 in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+        if L_171_forvar1:IsA("BasePart") then
+            L_171_forvar1:Destroy()
+        end
+    end
+    end
+end)
+    end
+})
+
+tab:Toggle({
+    Title = "Underground AA Resolver",
+    Description = "toggle doesnt work :(",
+    Callback = function()
+        local RunService = game:GetService("RunService")
+
+RunService.Heartbeat:Connect(function()
+    pcall(function()
+        for i,v in pairs(game.Players:GetChildren()) do
+            if v.Name ~= game.Players.LocalPlayer.Name then
+                local hrp = v.Character.HumanoidRootPart
+                hrp.Velocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)    
+                hrp.AssemblyLinearVelocity = Vector3.new(hrp.Velocity.X, 0, hrp.Velocity.Z)   
+            end
+        end
+    end)
+end)
+    end
+})
+
+tab:Button({
+    Title = "Rejoin",
+    Callback = function()
+        local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+
+coroutine.resume(Rejoin)
+    end
+})
+
+tab:Button({
+    Title = "Underground AA (N)",
+    Callback = function()
+        local Toggled = false
+local KeyCode = 'n'
+
+
+function AA()
+    local oldVelocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, oldVelocity.Y, oldVelocity.Z)
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(oldVelocity.X, -70, oldVelocity.Z)
+    game.Players.LocalPlayer.Character.Humanoid.HipHeight = 3.3
+end
+
+game:GetService('UserInputService').InputBegan:Connect(function(Key)
+    if Key.KeyCode == Enum.KeyCode[KeyCode:upper()] and not game:GetService('UserInputService'):GetFocusedTextBox() then
+        if Toggled then
+            Toggled = false
+            game.Players.LocalPlayer.Character.Humanoid.HipHeight = 2
+
+        elseif not Toggled then
+            Toggled = true
+
+            while Toggled do
+                AA()
+                task.wait()
+            end
+        end
+    end
+end)
+    end
+})
+
+tab:Button({
+    Title = "Antibag",
+    Callback = function()
+        game.Players.LocalPlayer.Character["Christmas_Sock"]:Destroy()  
+    end
+})
+
+tab:Button({
+    Title = "Gun Chams",
+    Callback = function()
+        local Client = game.GetService(game, "Players").LocalPlayer
+        Client.Character:FindFirstChildOfClass("Tool").Default.Material = Enum.Material.ForceField
+        Client.Character:FindFirstChildOfClass("Tool").Default.BrickColor  = BrickColor.new(255, 255, 255)
+  
+        
+    
+    end
+})
+
+tab:Button({
+    Title = "ESP",
+    Callback = function()
+    local library = loadstring(game:HttpGet("https://raw.githubusercontent.com/trendyylol/roblox/main/Libraries/ESP/Pikahub"))()
+local library = loadstring(game:HttpGet("https://pastebin.com/raw/U2HwmEyF"))()    
+    end
+})
+
+tab:Toggle({
+    Title = "Boxes",
+    Description = "Enables Box ESP",
+    Callback = function(bool)
+        getgenv().PikaESPSettings.Box = bool
+    end
+})
+tab:Toggle({
+    Title = "Name",
+    Description = "Enables Name ESP (dunno why it says Destory.XYZ",
+    Callback = function(bool)
+     getgenv().PikaESPSettings.Name = bool   
+    end
+})
+
+tab:Toggle({
+    Title = "Tracers",
+    Description = "Enables Tracers ESP",
+    Callback = function(bool)
+     getgenv().PikaESPSettings.Tracers = bool   
+    end
+})
+
+tab:Toggle({
+    Title = "Tracers Follow Mouse",
+    Description = "yeh",
+    Callback = function(bool)
+     getgenv().PikaESPSettings.UnlockTracers = bool   
+    end
+})
+
+local tab = win:NewTab({
+    Title = "Characteristics"
+})
+
+tab:Button({
+    Title = "Headless",
+    Callback = function()
+        local L_393_ = game.Players.LocalPlayer.Character
+    local L_394_ = L_393_:WaitForChild("Head")
+    local L_395_ = L_394_:WaitForChild("face")
+    L_395_.Transparency = 1 
+    L_394_.Transparency = 1
+    end
+})
+
+tab:Button({
+    Title = "Korblox",
+    Callback = function()
+        local L_396_ = game.Players.LocalPlayer.Character
+    local L_397_ = game.Players.LocalPlayer.Character
+    local L_398_ = L_396_.Head
+    local L_399_ = L_398_.face
+    local L_400_ = L_397_.RightFoot
+    local L_401_ = L_397_.RightLowerLeg
+    local L_402_ = L_397_.RightUpperLeg
+    local L_403_ = L_397_.LeftFoot
+    local L_404_ = L_397_.LeftLowerLeg
+    local L_405_ = L_397_.LeftUpperLeg
+    
+    -- Right
+    L_400_.MeshId = "http://www.roblox.com/asset/?id=902942093"
+    L_401_.MeshId = "http://www.roblox.com/asset/?id=902942093"
+    L_402_.MeshId = "http://www.roblox.com/asset/?id=902942096"
+    L_402_.TextureID = "http://roblox.com/asset/?id=902843398"
+    L_400_.Transparency = 1
+    L_401_.Transparency = 1
+    
+    end
+})
+tab:Button({
+    Title = "Fat",
+    Callback = function()
+       loadstring(game:HttpGet("https://raw.githubusercontent.com/slammy1/fat/main/3"))() 
+    end
+})
+
+tab:Button({
+    Title = "Playful Vampire",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://2409281591"
+    end
+})
+tab:Button({
+    Title = "Beastmode red",
+    Callback = function()
+        local L_412_ = game.Players.LocalPlayer.Character
+	local L_413_ = L_412_:WaitForChild("Head")
+	local L_414_ = L_413_:WaitForChild("face")
+	L_414_.Texture = "rbxassetid://127959433"
+    end
+})
+
+tab:Button({
+    Title = "Yum!",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://26018945"
+    end
+})
+
+tab:Button({
+    Title = "Super Super Happy Face",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://494290547"
+    end
+})
+tab:Button({
+    Title = "Prankster",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://20052028"
+    end
+})
+tab:Button({
+    Title = "Trouble Maker",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://22920500"
+    end
+})
+
+tab:Button({
+    Title = "Meanie",
+    Callback = function()
+           local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://508490451"
+    end
+})
+
+tab:Button({
+    Title = "StitchFace",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://8329438"
+    end
+})
+
+tab:Button({
+    Title = "Madness",
+    Callback = function()
+            local L_415_ = game.Players.LocalPlayer.Character
+	local L_416_ = L_415_:WaitForChild("Head")
+	local L_417_ = L_416_:WaitForChild("face")
+	L_417_.Texture = "rbxassetid://129900258"
+    end
+})
+
+tab:Button({
+    Title = "FE Korblox",
+    Callback = function()
+       game.Players.LocalPlayer.Character.RightUpperLeg:Destroy() 
+    end
+})
+
+tab:Button({
+    Title = "Body Chams",
+    Callback = function()
+               game.Players.LocalPlayer.Character.LeftHand.Material = "ForceField"
+        game.Players.LocalPlayer.Character.RightHand.Material = "ForceField"
+        game.Players.LocalPlayer.Character.LeftLowerArm.Material = "ForceField"
+        game.Players.LocalPlayer.Character.RightLowerArm.Material = "ForceField"
+        game.Players.LocalPlayer.Character.LeftUpperArm.Material = "ForceField"
+        game.Players.LocalPlayer.Character.RightUpperArm.Material = "ForceField"
+        game.Players.LocalPlayer.Character.LeftFoot.Material = "ForceField"
+        game.Players.LocalPlayer.Character.RightFoot.Material = "ForceField"
+        game.Players.LocalPlayer.Character.LeftLowerLeg.Material = "ForceField"
+        game.Players.LocalPlayer.Character.RightLowerLeg.Material = "ForceField"
+        game.Players.LocalPlayer.Character.UpperTorso.Material = "ForceField"
+        game.Players.LocalPlayer.Character.LowerTorso.Material = "ForceField"
+        game.Players.LocalPlayer.Character.LeftUpperLeg.Material = "ForceField"
+        game.Players.LocalPlayer.Character.RightUpperLeg.Material = "ForceField"
+        game.Players.LocalPlayer.Character.Head.Material = "ForceField"
+
+    end
+})
+local tab = win:NewTab({
+    Title = "Tp's"
+})
+
+tab:Button({
+    Title = "Food",
+    Callback = function()
+        
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =
+        CFrame.new(-788.39318847656, -39.649200439453, -935.27795410156)
+    end
+})
+
+tab:Button({
+    Title = "Admin Base",
+    Callback = function()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-874.903992, -32.6492004, -525.215698)
+    end
+})
+
+tab:Button({
+    Title = "Casino",
+    Callback = function()
+      game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-962.72345, 21.2549973, -186.814987, -0.0274876002, 2.91178949e-05, 0.999621451, -5.5798846e-06, 1, -2.92823333e-05, -0.999621451, -6.38268148e-06, -0.0274876002)
+    end
+})
+
+tab:Button({
+    Title = "Bank",
+    Callback = function()
+          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-402.123718, 21.75, -283.988617, 0.0159681588, -0.000121377925, -0.999872446, -2.60148026e-05, 1, -0.000121808866, 0.999872506, 2.79565484e-05, 0.0159681737)
+    end
+})
+
+local tab = win:NewTab({
+    Title = "Autobuys"
+})
+tab:Button({
+    Title = "PopCorn",
+    Callback = function()
+               local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Popcorn] - $7"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Popcorn] - $7"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Popcorn] - $7"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos) 
+    end
+})
+
+tab:Button({
+    Title = "Revolver",
+    Callback = function()
+                LocalPlayer = game:GetService "Players".LocalPlayer
+        local gunName = "[Revolver] - $1300"
+        local k = game.Workspace.Ignored.Shop[gunName]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop[gunName].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop[gunName].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+    end
+})
+
+tab:Button({
+    Title = "Double Barrel",
+    Callback = function()
+         
+        LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Double-Barrel SG] - $1400"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Double-Barrel SG] - $1400"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Double-Barrel SG] - $1400"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+    end
+})
+
+tab:Button({
+    Title = "Smg",
+    Callback = function()
+              LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[SMG] - $750"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[SMG] - $750"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[SMG] - $750"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)  
+    end
+})
+tab:Button({
+    Title = "AK47",
+    Callback = function()
+            LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[AK47] - $2250"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[AK47] - $2250"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[AK47] - $2250"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos) 
+    end
+})
+
+tab:Button({
+    Title = "LMG",
+    Callback = function()
+           LocalPlayer = game:GetService "Players".LocalPlayer
+    local k = game.Workspace.Ignored.Shop["[LMG] - $3750"]
+    local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+    wait(0.5)
+    fireclickdetector(game.Workspace.Ignored.Shop["[LMG] - $3750"].ClickDetector)
+    fireclickdetector(game.Workspace.Ignored.Shop["[LMG] - $3750"].ClickDetector)
+    LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+    end
+})
+
+tab:Button({
+    Title = "Glock",
+    Callback = function()
+            LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Glock] - $500"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Glock] - $500"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Glock] - $500"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos) 
+    end
+})
+
+tab:Button({
+    Title = "Silencer",
+    Callback = function()
+           LocalPlayer = game:GetService "Players".LocalPlayer
+    local k = game.Workspace.Ignored.Shop["[Silencer] - $550"]
+    local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+    wait(0.5)
+    fireclickdetector(game.Workspace.Ignored.Shop["[Silencer] - $550"].ClickDetector)
+    fireclickdetector(game.Workspace.Ignored.Shop["[Silencer] - $550"].ClickDetector)
+    LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+    end
+})
+
+tab:Button({
+    Title = "RPG",
+    Callback = function()
+        LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[RPG] - $6000"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[RPG] - $6000"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[RPG] - $6000"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos) 
+    end
+})
+
+tab:Button({
+    Title = "Flamethrower",
+    Callback = function()
+            LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Flamethrower] - $25000"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Flamethrower] - $25000"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Flamethrower] - $25000"].ClickDetector)
+
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+
+    end
+})
+
+tab:Button({
+    Title = "Revolver Ammo",
+    Callback = function()
+       local LocalPlayer = game:GetService "Players".LocalPlayer
+        local gunName = "12 [Revolver Ammo] - $75"
+        local k = game.Workspace.Ignored.Shop[gunName]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop[gunName].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop[gunName].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "Double-Barrel Ammo",
+    Callback = function()
+          local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["18 [Double-Barrel SG Ammo] - $60"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["18 [Double-Barrel SG Ammo] - $60"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["18 [Double-Barrel SG Ammo] - $60"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)    
+    end
+})
+
+tab:Button({
+    Title = "SMG Ammo",
+    Callback = function()
+           LocalPlayer = game:GetService "Players".LocalPlayer
+            local k = game.Workspace.Ignored.Shop["80 [SMG Ammo] - $60"]
+            local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+            wait(0.5)
+            fireclickdetector(game.Workspace.Ignored.Shop["80 [SMG Ammo] - $60"].ClickDetector)
+            fireclickdetector(game.Workspace.Ignored.Shop["80 [SMG Ammo] - $60"].ClickDetector)
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "AK47 Ammo",
+    Callback = function()
+                LocalPlayer = game:GetService "Players".LocalPlayer
+                local k = game.Workspace.Ignored.Shop["90 [AK47 Ammo] - $80"]
+                local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+                wait(0.5)
+                fireclickdetector(game.Workspace.Ignored.Shop["90 [AK47 Ammo] - $80"].ClickDetector)
+                fireclickdetector(game.Workspace.Ignored.Shop["90 [AK47 Ammo] - $80"].ClickDetector)
+                LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "LMG Ammo",
+    Callback = function()
+                 local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["200 [LMG Ammo] - $300"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["200 [LMG Ammo] - $300"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["200 [LMG Ammo] - $300"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "Glock Ammo",
+    Callback = function()
+            local LocalPlayer = game:GetService "Players".LocalPlayer
+            local k = game.Workspace.Ignored.Shop["25 [Glock Ammo] - $60"]
+            local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+            wait(0.5)
+            fireclickdetector(game.Workspace.Ignored.Shop["25 [Glock Ammo] - $60"].ClickDetector)
+            fireclickdetector(game.Workspace.Ignored.Shop["25 [Glock Ammo] - $60"].ClickDetector)
+            LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)  
+    end
+})
+
+tab:Button({
+    Title = "Silencer Ammo",
+    Callback = function()
+                local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["25 [Silencer Ammo] - $50"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["25 [Silencer Ammo] - $50"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["25 [Silencer Ammo] - $50"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+    end
+})
+
+tab:Button({
+    Title = "RPG Ammo",
+    Callback = function()
+                 local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["5 [RPG Ammo] - $1000"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["5 [RPG Ammo] - $1000"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["5 [RPG Ammo] - $1000"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+tab:Button({
+    Title = "Flamethrower Ammo",
+    Callback = function()
+     local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["140 [Flamethrower Ammo] - $1550"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["140 [Flamethrower Ammo] - $1550"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["140 [Flamethrower Ammo] - $1550"].ClickDetector)
+
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "Pizza",
+    Callback = function()
+           local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Pizza] - $5"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Pizza] - $5"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Pizza] - $5"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "Chicken",
+    Callback = function()
+            local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Chicken] - $7"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Chicken] - $7"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Chicken] - $7"].ClickDetector)
+
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)    
+    end
+})
+
+tab:Button({
+    Title = "Taco",
+    Callback = function()
+           local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Taco] - $2"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Taco] - $2"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Taco] - $2"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "HotDog",
+    Callback = function()
+          local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[HotDog] - $8"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[HotDog] - $8"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[HotDog] - $8"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)    
+    end
+})
+
+tab:Button({
+    Title = "Hamburger",
+    Callback = function()
+             local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Hamburger] - $5"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Hamburger] - $5"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Hamburger] - $5"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "Lettuce",
+    Callback = function()
+           local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Lettuce] - $5"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Lettuce] - $5"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Lettuce] - $5"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+tab:Button({
+    Title = "Donut",
+    Callback = function()
+           local LocalPlayer = game:GetService "Players".LocalPlayer
+        local k = game.Workspace.Ignored.Shop["[Donut] - $5"]
+        local savedsilencerpos = LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = k.Head.CFrame + Vector3.new(0, 3, 0)
+        wait(0.5)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Donut] - $5"].ClickDetector)
+        fireclickdetector(game.Workspace.Ignored.Shop["[Donut] - $5"].ClickDetector)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)
+        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(savedsilencerpos)   
+    end
+})
+
+
